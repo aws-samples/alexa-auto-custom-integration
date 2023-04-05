@@ -1,0 +1,237 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "my car",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "RequestInfoIntent",
+                    "slots": [
+                        {
+                            "name": "infoTypeRequested",
+                            "type": "infoType"
+                        }
+                    ],
+                    "samples": [
+                        "how much {infoTypeRequested} left",
+                        "for my car's {infoTypeRequested}",
+                        "tell me my car's {infoTypeRequested}",
+                        "what is the {infoTypeRequested} left for my car",
+                        "give me {infoTypeRequested} of my car",
+                        "{infoTypeRequested}",
+                        "what's {infoTypeRequested}",
+                        "what's car {infoTypeRequested}",
+                        "get me {infoTypeRequested} of my car",
+                        "for my {infoTypeRequested}",
+                        "provide {infoTypeRequested}",
+                        "what are {infoTypeRequested}",
+                        "tell me {infoTypeRequested}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CarCtrlAirCondPwrIntent",
+                    "slots": [
+                        {
+                            "name": "SetConditionRequested",
+                            "type": "DeviceState",
+                            "multipleValues": {
+                                "enabled": false
+                            }
+                        }
+                    ],
+                    "samples": [
+                        "turn {SetConditionRequested} the A. C.",
+                        "turn {SetConditionRequested} the air conditioner",
+                        "{SetConditionRequested} air conditioner",
+                        "set A. C. {SetConditionRequested}",
+                        "{SetConditionRequested} A. C.",
+                        "set {SetConditionRequested} air conditioner",
+                        "turn {SetConditionRequested} air conditioner"
+                    ]
+                },
+                {
+                    "name": "CarCtrlAirCondTempIntent",
+                    "slots": [
+                        {
+                            "name": "AC_TEMP_SET",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "turn temperature to {AC_TEMP_SET} degree",
+                        "set temperature to {AC_TEMP_SET} degree"
+                    ]
+                },
+                {
+                    "name": "CarCtrlAirCondFanIntent",
+                    "slots": [
+                        {
+                            "name": "AC_FAN_SET",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "turn air conditioner fan to {AC_FAN_SET}",
+                        "set air conditioner fan to {AC_FAN_SET}",
+                        "turn air conditioner fan speed to {AC_FAN_SET}",
+                        "set air conditioner fan speed to {AC_FAN_SET}",
+                        "set fan speed to {AC_FAN_SET}",
+                        "turn AC fan speed to {AC_FAN_SET}",
+                        "set AC fan speed to {AC_FAN_SET}",
+                        "turn fan speed to {AC_FAN_SET}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "infoType",
+                    "values": [
+                        {
+                            "id": "AC_TEMP_GET",
+                            "name": {
+                                "value": "ac_temp_status"
+                            }
+                        },
+                        {
+                            "id": "AC_FAN_GET",
+                            "name": {
+                                "value": "ac_fan_status"
+                            }
+                        },
+                        {
+                            "id": "AC_PWR_GET",
+                            "name": {
+                                "value": "ac_power_status"
+                            }
+                        },
+                        {
+                            "id": "BAT",
+                            "name": {
+                                "value": "battery_status",
+                                "synonyms": [
+                                    "charging",
+                                    "charging status",
+                                    "battery status",
+                                    "battery left",
+                                    "battery"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "MLG",
+                            "name": {
+                                "value": "mileage",
+                                "synonyms": [
+                                    "k. m. left",
+                                    "miles",
+                                    "how many miles left",
+                                    "how much miles",
+                                    "how many kilometers left",
+                                    "how much kilometers left",
+                                    "current mileage",
+                                    "range",
+                                    "how far can I go",
+                                    "car mileage",
+                                    "car range"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "DRS",
+                            "name": {
+                                "value": "doorStatus",
+                                "synonyms": [
+                                    "door",
+                                    "door is open",
+                                    "door is close",
+                                    "door open",
+                                    "door close",
+                                    "is the door open",
+                                    "is the door close"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "AIF",
+                            "name": {
+                                "value": "allInfo",
+                                "synonyms": [
+                                    "status",
+                                    "everything about car",
+                                    "all you know about car",
+                                    "all car's details",
+                                    "my car data",
+                                    "full set of details",
+                                    "all info",
+                                    "car entire profile",
+                                    "all information",
+                                    "all of it"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DeviceState",
+                    "values": [
+                        {
+                            "id": "AC_PWR_OFF",
+                            "name": {
+                                "value": "ac_power_status_off",
+                                "synonyms": [
+                                    "turn off",
+                                    "shut off",
+                                    "shut down",
+                                    "off",
+                                    "close",
+                                    "stop"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "AC_PWR_ON",
+                            "name": {
+                                "value": "ac_power_status_on",
+                                "synonyms": [
+                                    "turn on",
+                                    "turn down",
+                                    "bring back",
+                                    "start",
+                                    "open",
+                                    "on"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
