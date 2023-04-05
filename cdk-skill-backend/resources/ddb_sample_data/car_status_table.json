@@ -1,0 +1,33 @@
+{
+    "vin": {
+      "S": "test-vin"
+    },
+    "AC_FAN_SET": {
+      "S": "3.0"
+    },
+    "AC_PWR_SET": {
+      "S": "ON"
+    },
+    "AC_TEMP_SET": {
+      "S": "25"
+    },
+    "BAT": {
+      "S": "86"
+    },
+    "BAT_unit": {
+      "S": "percentage"
+    },
+    "DRS": {
+      "S": "G"
+    },
+    "MLG": {
+      "S": "11974"
+    },
+    "MLG_unit": {
+      "S": "kilometers"
+    },
+    "TS": {
+      "S": "1675751788988"
+    }
+}
+  

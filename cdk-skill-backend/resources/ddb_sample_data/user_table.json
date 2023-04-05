@@ -1,0 +1,9 @@
+{
+    "email_address": {
+        "S": "***@***.com"
+    },
+    "vin": {
+        "S": "test-vin"
+    }
+ }
+    
