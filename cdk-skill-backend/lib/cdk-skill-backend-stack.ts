@@ -92,16 +92,5 @@ export class CdkSkillBackendStack extends cdk.Stack {
       code: lambda.Code.fromAsset('./resources/skill'),
       timeout: Duration.minutes(15)
     });
-
-    
-
-    const process_sqs_function = new lambda.Function(this, "processSQSFunction", {
-      functionName: "process_sqs_function",
-      runtime: lambda.Runtime.PYTHON_3_9,
-      handler: 'lambda_function.lambda_handler',
-      code: lambda.Code.fromAsset('./resources/sqs_consumer'),
-      timeout: Duration.minutes(15),
-      role: lambda_execution_role
-    });
   }
 }
