@@ -1,0 +1,12 @@
+{  
+    "event": {  
+        "context": [],
+        "header": {
+          "namespace": "System",
+          "name": "SynchronizeState",
+          "messageId": "7175e870-c0c4-11ed-afa1-0242ac120002"
+        },
+        "payload": {
+        }
+    }  
+}  

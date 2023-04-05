@@ -1,0 +1,17 @@
+----------abcde123
+Content-Disposition: form-data; name="metadata"  
+Content-Type: application/json; charset=UTF-8  
+
+{
+  "event": {
+    "header": {
+      "namespace": "System",
+      "name": "TimeZoneChanged",
+      "messageId": "4d7fb28c-c0e9-11ed-afa1-0242ac120002"
+    },
+    "payload": {
+      "timeZone": "Asia/Shanghai"
+    }
+  }
+}
+----------abcde123--
