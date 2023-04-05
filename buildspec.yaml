@@ -1,0 +1,56 @@
+version: 0.2
+
+env:
+  shell: /bin/sh
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - apt-get update
+      - apt install -y unzip
+      - apt install -y cmake
+      - apt install -y jq
+      - pip install conan
+  pre_build:
+    commands:
+      - DEV_TOOLS=/home/codebuild-user/devtools
+      - ANDROID_HOME=$DEV_TOOLS/Android
+      - LOCAL_HOME=/home/codebuild-user/.local/bin
+      - PATH=$ANDROID_HOME/build-tools/29.0.3:$LOCAL_HOME:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+      - echo $PATH
+      - mkdir -p /home/codebuild-user/devtools/Android/cmdline-tools 
+      - cd /home/codebuild-user
+      - wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
+      - unzip commandlinetools-linux-8512546_latest.zip -d /home/codebuild-user/devtools/Android/cmdline-tools
+      - cd /home/codebuild-user/devtools/Android/cmdline-tools
+      - mv cmdline-tools latest
+      - yes | sdkmanager --licenses
+      - yes | sdkmanager "platform-tools" "platforms;android-29"
+      - yes | sdkmanager "build-tools;29.0.3"
+      - mkdir /home/codebuild-user/Projects
+      - cd /home/codebuild-user/Projects
+      - git config --global credential.helper '!aws codecommit credential-helper $@'
+      - git config --global credential.UseHttpPath true
+      - git clone https://git-codecommit.${AWS_REGION}.amazonaws.com/v1/repos/alexa-auto-sdk
+      - mkdir alexa-auto-sdk/aacs/android/app-components/alexa-auto-voice-interaction/libs
+      - cd alexa-auto-sdk/aacs/android/app-components/alexa-auto-voice-interaction/libs
+      - aws s3 cp s3://alexa-auto-app-input-artifact-<accountid>/autovoicechrome.aar .
+      - cd /home/codebuild-user
+      - aws s3 cp s3://alexa-auto-app-input-artifact-<accountid>/alexa-sign.keystore .
+  build:
+    commands:
+      - cd /home/codebuild-user/Projects/alexa-auto-sdk/aacs/android/sample-app
+      - ./gradlew assembleLocalRelease -PacceptLicenses 
+  post_build:
+    commands:
+      - passphrase=$(aws secretsmanager   get-secret-value --secret-id keystore-passphrase --query SecretString --output text | jq -r '.passphrase')
+      - cd /home/codebuild-user/Projects/alexa-auto-sdk/aacs/android/sample-app/alexa-auto-app/build/outputs/apk/local/release
+      - zipalign -v -p 4 alexa-auto-app_release_4.1.1.apk alexa-auto-app_release_4.1.1-aligned.apk
+      - apksigner sign --ks /home/codebuild-user/alexa-sign.keystore --ks-pass pass:$passphrase --out alexa-auto-app_release_4.1.1-aligned-signed.apk alexa-auto-app_release_4.1.1-aligned.apk
+      - cd /home/codebuild-user/Projects/alexa-auto-sdk/aacs/android/sample-app/alexa-auto-app/build/outputs/apk/local/release
+      - aws s3 cp . s3://alexa-auto-app-output-artifact-<accountid>/ --recursive
+    
+      
+    
+
