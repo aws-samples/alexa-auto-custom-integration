@@ -28,7 +28,7 @@ export class CdkSkillBackendStack extends cdk.Stack {
     
     const write_to_ddb_policy = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
-      actions: ['dynamoDB:PutItem'],
+      actions: ['dynamoDB:*'],
       resources: [user_table.tableArn, car_status_table.tableArn]
     });
 
@@ -77,14 +77,6 @@ export class CdkSkillBackendStack extends cdk.Stack {
     //   },
     // });
 
-    const lambda_execution_role = new iam.Role(this, 'lambdaexecutionrole', {
-      roleName: "lambda_execution_role",
-      assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
-    });
-
-    lambda_execution_role.addToPolicy(write_to_ddb_policy);
-
-
     const skill_function = new lambda.Function(this, 'skillFunction', {
       functionName: "skill_function",
       runtime: lambda.Runtime.PYTHON_3_9,
@@ -92,5 +84,7 @@ export class CdkSkillBackendStack extends cdk.Stack {
       code: lambda.Code.fromAsset('./resources/skill'),
       timeout: Duration.minutes(15)
     });
+
+    skill_function.addToRolePolicy(write_to_ddb_policy);
   }
 }
